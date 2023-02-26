@@ -41,7 +41,7 @@
                     <div class="postId"><xsl:value-of select="id" /></div>
                 </div>
                 <div class="postContent">
-                    <xsl:value-of select="content" />
+                    <xsl:value-of select="content" disable-output-escaping="yes" />
                 </div>
                 <div class="comments">
                     <xsl:for-each select="/feed/entry[thr:in-reply-to/@ref=$postId]">
