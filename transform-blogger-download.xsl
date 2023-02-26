@@ -19,7 +19,20 @@
         <xsl:variable name="postId" select="id"></xsl:variable>
         <xsl:variable name="postYear" select="substring(published, 1, 4)"></xsl:variable>
         <xsl:variable name="postMonth" select="substring(published, 6, 2)"></xsl:variable>
-        <exsl:document href="./{$postYear}/{$postMonth}/{$postId}.html">
+        <xsl:variable name="postShortId" select="substring-after(substring-after(id, '-'), '-')"></xsl:variable>
+        <xsl:variable name="postVeryShortId" select="substring($postShortId, 1, 6)"></xsl:variable>
+        <xsl:variable name="postFilenameCandidate" select="concat(substring(translate(translate(title, ' ', '-'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;:?!,+#$', 'abcdefghijklmnopqrstuvwxyz-------'), 1, 16), $postVeryShortId)"></xsl:variable>
+        <xsl:variable name="postFilename">
+            <xsl:choose>
+                <xsl:when test="string-length(title) > 0">
+                    <xsl:value-of select="$postFilenameCandidate" />
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$postShortId" />
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <exsl:document href="./{$postYear}/{$postMonth}/{$postFilename}.html">
             <div class="post">
                 <div class="postTitle"><xsl:value-of select="title" /></div>
                 <div class="metadata">
