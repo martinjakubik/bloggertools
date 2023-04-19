@@ -11,10 +11,10 @@ basefilename=$(basename $1)
 infilename=${basedirname}/generated/${basefilename}
 outfilename=${basedirname}/generated/${basefilename}.out
 
-echo " input file: " $basefilename
+echo " input file: " $basefilepath
 echo "output file: " $outfilename
 
-cp $basefilename $infilename
+cp $basefilepath $infilename
 
 sed -e 's/&lt;/</g' $infilename > $infilename.1
 sed -e 's/&gt;/>/g' $infilename.1 > $infilename.2
