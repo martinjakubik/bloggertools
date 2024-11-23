@@ -2,6 +2,8 @@
 
     <xsl:output method="html"/>
 
+    <xsl:variable name="siteRootUrl">https://www.supertitle.org/books</xsl:variable>
+
     <xsl:template match="/">
         <xsl:apply-templates select="/feed/entry" />
     </xsl:template>
@@ -15,6 +17,35 @@
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#comment']">
     </xsl:template>
     
+    <xsl:template match="entry" mode="linkref">
+        <xsl:variable name="postId" select="id"></xsl:variable>
+        <xsl:variable name="postYear" select="substring(published, 1, 4)"></xsl:variable>
+        <xsl:variable name="postMonth" select="substring(published, 6, 2)"></xsl:variable>
+        <xsl:variable name="postShortId">   
+            <xsl:choose>
+                <xsl:when test="starts-with(id, 'tag:blogger.com')">
+                    <xsl:value-of select="substring-after(substring-after(id, '-'), '-')" />
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="substring-before(id, '-')" />
+                </xsl:otherwise>
+            </xsl:choose>
+            </xsl:variable>
+        <xsl:variable name="postVeryShortId" select="substring($postShortId, 1, 6)"></xsl:variable>
+        <xsl:variable name="postFilenameCandidate" select="concat(substring(translate(translate(title, ' ', '-'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;:?!,+#$', 'abcdefghijklmnopqrstuvwxyz-------'), 1, 16), '-', $postVeryShortId)"></xsl:variable>
+        <xsl:variable name="postFilename">
+            <xsl:choose>
+                <xsl:when test="string-length(title) > 0">
+                    <xsl:value-of select="$postFilenameCandidate" />
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$postShortId" />
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="concat($siteRootUrl, '/', $postYear, '/', $postMonth, '/', $postFilename, '.html')"></xsl:value-of>
+    </xsl:template>
+
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post']">
         <xsl:variable name="postId" select="id"></xsl:variable>
         <xsl:variable name="postYear" select="substring(published, 1, 4)"></xsl:variable>
@@ -74,9 +105,10 @@
     </xsl:template>
     
     <xsl:template match="p/link">
+        <xsl:variable name="targetId" select="@targetId"></xsl:variable>
         <a>
             <xsl:attribute name="href">
-                <xsl:value-of select="@targetId"></xsl:value-of>
+                <xsl:apply-templates select="/feed/entry[id = $targetId]" mode="linkref"></xsl:apply-templates>
             </xsl:attribute>
             <xsl:apply-templates></xsl:apply-templates>
         </a>
