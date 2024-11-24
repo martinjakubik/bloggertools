@@ -2,7 +2,7 @@
 
     <xsl:output method="html"/>
 
-    <xsl:variable name="siteRootUrl">https://www.supertitle.org/books</xsl:variable>
+    <xsl:variable name="siteRootUrl">https://www.supertitle.org/content/books</xsl:variable>
 
     <xsl:template match="/">
         <xsl:apply-templates select="/feed/entry[category/@term='http://schemas.google.com/blogger/2008/kind#post']" />
