@@ -5,7 +5,18 @@
     <xsl:variable name="siteRootUrl">https://www.supertitle.org/books</xsl:variable>
 
     <xsl:template match="/">
-        <xsl:apply-templates select="/feed/entry" />
+        <xsl:apply-templates select="/feed/entry[category/@term='http://schemas.google.com/blogger/2008/kind#post']" />
+        <exsl:document href="./result.html">
+            <html>
+                <body>
+                    <ul>
+                        <li>
+                            <p>entries: <xsl:value-of select="count(/feed/entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'])"></xsl:value-of></p>
+                        </li>
+                    </ul>
+                </body>
+            </html>
+        </exsl:document>
     </xsl:template>
 
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#template']">
