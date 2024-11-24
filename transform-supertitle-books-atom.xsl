@@ -115,6 +115,26 @@
                             </xsl:for-each>
                         </div>
                     </div>
+                    <div class="navigation">
+                        <xsl:if test="./following-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]">
+                            <a>
+                                <xsl:attribute name="href">
+                                    <xsl:apply-templates select="./following-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]" mode="linkref"></xsl:apply-templates>
+                                </xsl:attribute>
+                                <xsl:text>previous</xsl:text>
+                            </a>
+                        </xsl:if>
+                        <xsl:if test="./preceding-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]">
+                            <xsl:if test="./preceding-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]/id != 'uuid'">
+                                <a>
+                                    <xsl:attribute name="href">
+                                        <xsl:apply-templates select="./preceding-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]" mode="linkref"></xsl:apply-templates>
+                                    </xsl:attribute>
+                                    <xsl:text>next</xsl:text>
+                                </a>
+                            </xsl:if>
+                        </xsl:if>
+                    </div>
                 </body>
             </html>
         </exsl:document>
