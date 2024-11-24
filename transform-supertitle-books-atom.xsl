@@ -85,6 +85,11 @@
         </xsl:variable>
         <exsl:document href="./{$postYear}/{$postMonth}/{$postFilename}.html">
             <html>
+                <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="concat($siteRootUrl, '/screen.css')" />
+                    </xsl:attribute>
+                </link>
                 <body>
                     <div class="post">
                         <div class="postTitle"><xsl:value-of select="title" /></div>
