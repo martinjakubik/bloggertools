@@ -745,12 +745,13 @@
     <title type='text'>The Lincoln Lawyer</title>
     <content type='html'>
       <div dir="ltr" style="text-align: left;" trbidi="on">
-      <img class="bookCover" border="0"
-        src="https://upload.wikimedia.org/wikipedia/en/2/23/Lincolnlawyer.jpg"></img>
-      <br />
-      <p>The Lincoln Lawyer, Michael Connelly</p>
-      <p>Catching up on a book I picked up at uncle's place and did not finish.</p>
-      <p>Fast.</p>
+        <img class="bookCover" border="0"
+          src="https://upload.wikimedia.org/wikipedia/en/2/23/Lincolnlawyer.jpg"></img>
+        <br />
+        <p>The Lincoln Lawyer, Michael Connelly</p>
+        <p>Catching up on a book I picked up at uncle's place and did not finish.</p>
+        <p>Fast.</p>
+      </div>
     </content>
     <link rel='edit' type='application/atom+xml'
       href='https://www.blogger.com/feeds/8002380/posts/default/4839284838996955234' />
