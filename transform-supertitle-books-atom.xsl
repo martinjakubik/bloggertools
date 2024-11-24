@@ -84,30 +84,34 @@
             </xsl:choose>
         </xsl:variable>
         <exsl:document href="./{$postYear}/{$postMonth}/{$postFilename}.html">
-            <div class="post">
-                <div class="postTitle"><xsl:value-of select="title" /></div>
-                <div class="metadata">
-                    <div class="postDatePublished"><xsl:value-of select="published" /></div>
-                    <div class="postDateUpdated"><xsl:value-of select="updated" /></div>
-                    <div class="postId"><xsl:value-of select="id" /></div>
-                </div>
-                <div class="postContent">
-                    <xsl:apply-templates select="content" />
-                </div>
-                <div class="comments">
-                    <xsl:for-each select="/feed/entry[thr:in-reply-to/@ref=$postId]">
-                        <div class="comment">
-                            <div class="commentTitle"><xsl:value-of select="title" /></div>
-                            <div class="metadata">
-                                <div class="commentDatePublished"><xsl:value-of select="published" /></div>
-                                <div class="commentDateUpdated"><xsl:value-of select="updated" /></div>
-                                <div class="commentId"><xsl:value-of select="id" /></div>
-                            </div>
-                            <div class="commentContent"><xsl:value-of select="content" /></div>
+            <html>
+                <body>
+                    <div class="post">
+                        <div class="postTitle"><xsl:value-of select="title" /></div>
+                        <div class="metadata">
+                            <div class="postDatePublished"><xsl:value-of select="published" /></div>
+                            <div class="postDateUpdated"><xsl:value-of select="updated" /></div>
+                            <div class="postId"><xsl:value-of select="id" /></div>
                         </div>
-                    </xsl:for-each>
-                </div>
-            </div>
+                        <div class="postContent">
+                            <xsl:apply-templates select="content" />
+                        </div>
+                        <div class="comments">
+                            <xsl:for-each select="/feed/entry[thr:in-reply-to/@ref=$postId]">
+                                <div class="comment">
+                                    <div class="commentTitle"><xsl:value-of select="title" /></div>
+                                    <div class="metadata">
+                                        <div class="commentDatePublished"><xsl:value-of select="published" /></div>
+                                        <div class="commentDateUpdated"><xsl:value-of select="updated" /></div>
+                                        <div class="commentId"><xsl:value-of select="id" /></div>
+                                    </div>
+                                    <div class="commentContent"><xsl:value-of select="content" /></div>
+                                </div>
+                            </xsl:for-each>
+                        </div>
+                    </div>
+                </body>
+            </html>
         </exsl:document>
     </xsl:template>
 
