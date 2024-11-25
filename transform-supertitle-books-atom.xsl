@@ -6,6 +6,7 @@
 
     <xsl:template match="/">
         <xsl:apply-templates select="/feed/entry[category/@term='http://schemas.google.com/blogger/2008/kind#post']" />
+        <xsl:apply-templates select="/feed" mode="index" />
         <exsl:document href="./result.html">
             <html>
                 <body>
@@ -55,6 +56,29 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:value-of select="concat($siteRootUrl, '/', $postYear, '/', $postMonth, '/', $postFilename, '.html')"></xsl:value-of>
+    </xsl:template>
+
+    <xsl:template match="/feed" mode="index">
+        <exsl:document href="./postIndex.html">
+            <html>
+                <body>
+                    <ul>
+                        <xsl:for-each select="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post']">
+                            <li>
+                                <p>
+                                    <a>
+                                        <xsl:attribute name="href">
+                                            <xsl:apply-templates select="." mode="linkref"></xsl:apply-templates>
+                                        </xsl:attribute>
+                                        <xsl:value-of select="title"></xsl:value-of>
+                                    </a>
+                                </p>
+                            </li>
+                        </xsl:for-each>
+                    </ul>
+                </body>
+            </html>
+        </exsl:document>
     </xsl:template>
 
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post']">
