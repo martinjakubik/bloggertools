@@ -5,14 +5,14 @@
     <xsl:variable name="siteRootUrl">https://www.supertitle.org/content/books</xsl:variable>
 
     <xsl:template match="/">
-        <xsl:apply-templates select="/feed/entry[category/@term='http://schemas.google.com/blogger/2008/kind#post']" />
+        <xsl:apply-templates select="/feed/entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']" />
         <xsl:apply-templates select="/feed" mode="index" />
         <exsl:document href="./result.html">
             <html>
                 <body>
                     <ul>
                         <li>
-                            <p>entries: <xsl:value-of select="count(/feed/entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'])"></xsl:value-of></p>
+                            <p>entries: <xsl:value-of select="count(/feed/entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid'])"></xsl:value-of></p>
                         </li>
                     </ul>
                 </body>
@@ -63,7 +63,7 @@
             <html>
                 <body>
                     <ul>
-                        <xsl:for-each select="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post']">
+                        <xsl:for-each select="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']">
                             <li>
                                 <p>
                                     <a>
@@ -81,7 +81,7 @@
         </exsl:document>
     </xsl:template>
 
-    <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post']">
+    <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']">
         <xsl:variable name="postId" select="id"></xsl:variable>
         <xsl:variable name="postYear" select="substring(published, 1, 4)"></xsl:variable>
         <xsl:variable name="postMonth" select="substring(published, 6, 2)"></xsl:variable>
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                     <div class="navigation">
-                        <xsl:if test="./following-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]">
+                        <xsl:if test="./following-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid'][1]">
                             <a>
                                 <xsl:attribute name="href">
                                     <xsl:apply-templates select="./following-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]" mode="linkref"></xsl:apply-templates>
@@ -148,7 +148,7 @@
                                 <xsl:text>previous</xsl:text>
                             </a>
                         </xsl:if>
-                        <xsl:if test="./preceding-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]">
+                        <xsl:if test="./preceding-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid'][1]">
                             <xsl:if test="./preceding-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]/id != 'uuid'">
                                 <a>
                                     <xsl:attribute name="href">
