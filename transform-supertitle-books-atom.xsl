@@ -4,6 +4,8 @@
 
     <xsl:variable name="siteRootUrl">https://www.supertitle.org/content/books</xsl:variable>
 
+    <xsl:key name="postYearKey" match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']" use="substring(published, 1, 4)"></xsl:key>
+
     <xsl:template match="/">
         <xsl:apply-templates select="/feed/entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']" />
         <xsl:apply-templates select="/feed" mode="index" />
@@ -62,23 +64,28 @@
         <exsl:document href="./postIndex.html">
             <html>
                 <body>
-                    <ul>
-                        <xsl:for-each select="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']">
-                            <li>
-                                <p>
-                                    <a>
-                                        <xsl:attribute name="href">
-                                            <xsl:apply-templates select="." mode="linkref"></xsl:apply-templates>
-                                        </xsl:attribute>
-                                        <xsl:value-of select="title"></xsl:value-of>
-                                    </a>
-                                </p>
-                            </li>
-                        </xsl:for-each>
-                    </ul>
+                    <xsl:apply-templates select="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid'][generate-id(.)=generate-id(key('postYearKey', substring(published, 1, 4))[1])]" mode="index"></xsl:apply-templates>
                 </body>
             </html>
         </exsl:document>
+    </xsl:template>
+
+    <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']" mode="index">
+        <p><xsl:value-of select="substring(published, 1, 4)"></xsl:value-of></p>
+        <ul>
+            <xsl:for-each select="key('postYearKey', substring(published, 1, 4))">
+                <li>
+                    <p>
+                        <a>
+                            <xsl:attribute name="href">
+                                <xsl:apply-templates select="." mode="linkref"></xsl:apply-templates>
+                            </xsl:attribute>
+                            <xsl:value-of select="title"></xsl:value-of>
+                        </a>
+                    </p>
+                </li>
+            </xsl:for-each>
+        </ul>
     </xsl:template>
 
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']">
