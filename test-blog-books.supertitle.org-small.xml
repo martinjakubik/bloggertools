@@ -20,6 +20,26 @@ xmlns:georss='http://www.georss.org/georss'>
   </author>
   <generator version='7.00' uri='https://www.blogger.com'>Blogger</generator>
   <entry>
+    <id>uuid</id>
+    <published>YYYY-MM-DDThh:mm:ss.mmm+01:00</published>
+    <updated>YYYY-MM-DDThh:mm:ss.mmm+01:00</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind'
+      term='http://schemas.google.com/blogger/2008/kind#post' />
+    <title type='text'>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</title>
+    <content type='html'>
+      <div dir="ltr" style="text-align: left;" trbidi="on">
+        <img class="bookCover" border="0"
+          src="https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></img>
+        <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx,
+          bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</p>
+        <p>cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc</p>
+      </div>
+    </content>
+    <author>
+      <name>martin</name>
+    </author>
+  </entry>
+  <entry>
     <id>49D6199C-F330-45FC-B754-6E37B3123B20</id>
     <published>2024-10-31T20:30:14.024+01:00</published>
     <updated>2024-10-31T20:30:14.024+01:00</updated>
