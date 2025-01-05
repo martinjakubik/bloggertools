@@ -11,6 +11,9 @@
         <xsl:apply-templates select="/feed" mode="index" />
         <exsl:document href="./result.html">
             <html>
+                <head>
+                    <link rel="stylesheet" href="screen.css"></link>
+                </head>
                 <body>
                     <ul>
                         <li>
@@ -63,6 +66,9 @@
     <xsl:template match="/feed" mode="index">
         <exsl:document href="./postIndex.html">
             <html>
+                <head>
+                    <link rel="stylesheet" href="screen.css"></link>
+                </head>
                 <body>
                     <xsl:apply-templates select="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid'][generate-id(.)=generate-id(key('postYearKey', substring(published, 1, 4))[1])]" mode="index"></xsl:apply-templates>
                 </body>
