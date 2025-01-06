@@ -2,7 +2,7 @@
 
     <xsl:output method="html"/>
 
-    <xsl:variable name="siteRootUrl">https://www.supertitle.org/content/books</xsl:variable>
+    <xsl:variable name="siteRootUrl">https://www.supertitle.org/content/books/app</xsl:variable>
 
     <xsl:key name="postYearKey" match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']" use="substring(published, 1, 4)"></xsl:key>
 
@@ -124,7 +124,7 @@
             <html>
                 <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
                     <xsl:attribute name="href">
-                        <xsl:value-of select="concat($siteRootUrl, '/screen.css')" />
+                        <xsl:text>../../screen.css</xsl:text>
                     </xsl:attribute>
                 </link>
                 <body>
@@ -179,6 +179,10 @@
 
     <xsl:template match="p">
         <p><xsl:apply-templates></xsl:apply-templates></p>
+    </xsl:template>
+    
+    <xsl:template match="blockquote">
+        <blockquote><xsl:apply-templates></xsl:apply-templates></blockquote>
     </xsl:template>
     
     <xsl:template match="p/link">
