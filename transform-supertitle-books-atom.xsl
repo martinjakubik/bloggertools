@@ -35,6 +35,7 @@
     </xsl:template>
     
     <xsl:template match="entry" mode="linkref">
+        <xsl:param name="linkSource" select="post"></xsl:param>
         <xsl:variable name="postId" select="id"></xsl:variable>
         <xsl:variable name="postYear" select="substring(published, 1, 4)"></xsl:variable>
         <xsl:variable name="postMonth" select="substring(published, 6, 2)"></xsl:variable>
@@ -60,7 +61,17 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:value-of select="concat($siteRootUrl, '/', $postYear, '/', $postMonth, '/', $postFilename, '.html')"></xsl:value-of>
+        <xsl:choose>
+            <xsl:when test="$linkSource='index'">
+                <xsl:value-of select="concat($postYear, '/', $postMonth, '/', $postFilename, '.html')"></xsl:value-of>
+            </xsl:when>
+            <xsl:when test="$linkSource='post'">
+                <xsl:value-of select="concat('../..', '/', $postYear, '/', $postMonth, '/', $postFilename, '.html')"></xsl:value-of>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat($siteRootUrl, '/', $postYear, '/', $postMonth, '/', $postFilename, '.html')"></xsl:value-of>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="/feed" mode="index">
@@ -87,7 +98,9 @@
                     <p>
                         <a>
                             <xsl:attribute name="href">
-                                <xsl:apply-templates select="." mode="linkref"></xsl:apply-templates>
+                                <xsl:apply-templates select="." mode="linkref">
+                                    <xsl:with-param name="linkSource">index</xsl:with-param>
+                                </xsl:apply-templates>
                             </xsl:attribute>
                             <xsl:value-of select="title"></xsl:value-of>
                         </a>
@@ -164,7 +177,9 @@
                         <xsl:if test="./following-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid'][1]">
                             <a>
                                 <xsl:attribute name="href">
-                                    <xsl:apply-templates select="./following-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]" mode="linkref"></xsl:apply-templates>
+                                    <xsl:apply-templates select="./following-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]" mode="linkref">
+                                        <xsl:with-param name="linkSource">post</xsl:with-param>
+                                    </xsl:apply-templates>
                                 </xsl:attribute>
                                 <xsl:text>previous</xsl:text>
                             </a>
@@ -173,7 +188,9 @@
                             <xsl:if test="./preceding-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]/id != 'uuid'">
                                 <a>
                                     <xsl:attribute name="href">
-                                        <xsl:apply-templates select="./preceding-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]" mode="linkref"></xsl:apply-templates>
+                                        <xsl:apply-templates select="./preceding-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]" mode="linkref">
+                                            <xsl:with-param name="linkSource">post</xsl:with-param>
+                                        </xsl:apply-templates>
                                     </xsl:attribute>
                                     <xsl:text>next</xsl:text>
                                 </a>
@@ -197,7 +214,9 @@
         <xsl:variable name="targetId" select="@targetId"></xsl:variable>
         <a>
             <xsl:attribute name="href">
-                <xsl:apply-templates select="/feed/entry[id = $targetId]" mode="linkref"></xsl:apply-templates>
+                <xsl:apply-templates select="/feed/entry[id = $targetId]" mode="linkref">
+                    <xsl:with-param name="linkSource">post</xsl:with-param>
+                </xsl:apply-templates>
             </xsl:attribute>
             <xsl:apply-templates></xsl:apply-templates>
         </a>
