@@ -67,6 +67,9 @@
         <exsl:document href="./postIndex.html">
             <html>
                 <head>
+                    <link rel="stylesheet" href="../../../screen.css"></link>
+                </head>
+                <head>
                     <link rel="stylesheet" href="screen.css"></link>
                 </head>
                 <body>
@@ -122,6 +125,11 @@
         </xsl:variable>
         <exsl:document href="./{$postYear}/{$postMonth}/{$postFilename}.html">
             <html>
+                <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
+                    <xsl:attribute name="href">
+                        <xsl:text>../../../../../screen.css</xsl:text>
+                    </xsl:attribute>
+                </link>
                 <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
                     <xsl:attribute name="href">
                         <xsl:text>../../screen.css</xsl:text>
