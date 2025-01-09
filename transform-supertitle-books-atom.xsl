@@ -184,6 +184,7 @@
                                 <xsl:text>previous</xsl:text>
                             </a>
                         </xsl:if>
+                        <a href="../../postIndex.html">up</a>
                         <xsl:if test="./preceding-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid'][1]">
                             <xsl:if test="./preceding-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][1]/id != 'uuid'">
                                 <a>
