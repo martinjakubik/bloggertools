@@ -91,7 +91,7 @@
     </xsl:template>
 
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']" mode="index">
-        <p><xsl:value-of select="substring(published, 1, 4)"></xsl:value-of></p>
+        <h1 class="postYear"><xsl:value-of select="substring(published, 1, 4)"></xsl:value-of></h1>
         <ul>
             <xsl:for-each select="key('postYearKey', substring(published, 1, 4))">
                 <li>
