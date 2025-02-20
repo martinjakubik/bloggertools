@@ -83,6 +83,7 @@
                 </head>
                 <body>
                     <xsl:apply-templates select="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid'][generate-id(.)=generate-id(key('postYearKey', substring(published, 1, 4))[1])]" mode="index"></xsl:apply-templates>
+                    <script src="../../../app.js" type="module"></script>
                 </body>
             </html>
         </exsl:document>
@@ -137,16 +138,16 @@
         <exsl:document href="./{$postYear}/{$postMonth}/{$postFilename}.html">
             <html>
                 <head>
-                <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
-                    <xsl:attribute name="href">
-                        <xsl:text>../../../../../screen.css</xsl:text>
-                    </xsl:attribute>
-                </link>
-                <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
-                    <xsl:attribute name="href">
-                        <xsl:text>../../screen.css</xsl:text>
-                    </xsl:attribute>
-                </link>
+                    <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
+                        <xsl:attribute name="href">
+                            <xsl:text>../../../../../screen.css</xsl:text>
+                        </xsl:attribute>
+                    </link>
+                    <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
+                        <xsl:attribute name="href">
+                            <xsl:text>../../screen.css</xsl:text>
+                        </xsl:attribute>
+                    </link>
                 </head>
                 <body>
                     <div class="post">
@@ -198,6 +199,7 @@
                             </xsl:if>
                         </xsl:if>
                     </div>
+                    <script src="../../../app.js" type="module"></script>
                 </body>
             </html>
         </exsl:document>
