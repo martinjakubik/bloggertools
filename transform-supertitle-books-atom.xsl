@@ -79,8 +79,6 @@
             <html>
                 <head>
                     <link rel="stylesheet" href="../../../screen.css"></link>
-                </head>
-                <head>
                     <link rel="stylesheet" href="screen.css"></link>
                 </head>
                 <body>
@@ -205,6 +203,14 @@
 
     <xsl:template match="p">
         <p><xsl:apply-templates></xsl:apply-templates></p>
+    </xsl:template>
+    
+    <xsl:template match="i">
+        <i><xsl:apply-templates></xsl:apply-templates></i>
+    </xsl:template>
+    
+    <xsl:template match="b">
+        <b><xsl:apply-templates></xsl:apply-templates></b>
     </xsl:template>
     
     <xsl:template match="blockquote">
