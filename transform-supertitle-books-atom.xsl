@@ -136,6 +136,7 @@
         </xsl:variable>
         <exsl:document href="./{$postYear}/{$postMonth}/{$postFilename}.html">
             <html>
+                <head>
                 <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
                     <xsl:attribute name="href">
                         <xsl:text>../../../../../screen.css</xsl:text>
@@ -146,6 +147,7 @@
                         <xsl:text>../../screen.css</xsl:text>
                     </xsl:attribute>
                 </link>
+                </head>
                 <body>
                     <div class="post">
                         <div class="postTitle"><xsl:value-of select="title" /></div>
