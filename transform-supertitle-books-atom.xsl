@@ -199,7 +199,6 @@
                             </xsl:if>
                         </xsl:if>
                     </div>
-                    <script src="../../../../../app.js" type="module"></script>
                 </body>
             </html>
         </exsl:document>
