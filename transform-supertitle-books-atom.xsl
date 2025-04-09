@@ -82,6 +82,9 @@
                     <link rel="stylesheet" href="screen.css"></link>
                 </head>
                 <body>
+                    <div class="navigation">
+                        <a id="navigatehome" href="../../../index.html">Supertitle Home</a>
+                    </div>
                     <xsl:apply-templates select="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid'][generate-id(.)=generate-id(key('postYearKey', substring(published, 1, 4))[1])]" mode="index"></xsl:apply-templates>
                     <script src="../../../app.js" type="module"></script>
                 </body>
@@ -150,30 +153,6 @@
                     </link>
                 </head>
                 <body>
-                    <div class="post">
-                        <div class="postTitle"><xsl:value-of select="title" /></div>
-                        <div class="metadata">
-                            <div class="postDatePublished"><xsl:value-of select="published" /></div>
-                            <div class="postDateUpdated"><xsl:value-of select="updated" /></div>
-                            <div class="postId"><xsl:value-of select="id" /></div>
-                        </div>
-                        <div class="postContent">
-                            <xsl:apply-templates select="content" />
-                        </div>
-                        <div class="comments">
-                            <xsl:for-each select="/feed/entry[thr:in-reply-to/@ref=$postId]">
-                                <div class="comment">
-                                    <div class="commentTitle"><xsl:value-of select="title" /></div>
-                                    <div class="metadata">
-                                        <div class="commentDatePublished"><xsl:value-of select="published" /></div>
-                                        <div class="commentDateUpdated"><xsl:value-of select="updated" /></div>
-                                        <div class="commentId"><xsl:value-of select="id" /></div>
-                                    </div>
-                                    <div class="commentContent"><xsl:value-of select="content" /></div>
-                                </div>
-                            </xsl:for-each>
-                        </div>
-                    </div>
                     <div class="navigation">
                         <xsl:if test="./following-sibling::*[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid'][1]">
                             <a>
@@ -198,6 +177,30 @@
                                 </a>
                             </xsl:if>
                         </xsl:if>
+                    </div>
+                    <div class="post">
+                        <div class="postTitle"><xsl:value-of select="title" /></div>
+                        <div class="metadata">
+                            <div class="postDatePublished"><xsl:value-of select="published" /></div>
+                            <div class="postDateUpdated"><xsl:value-of select="updated" /></div>
+                            <div class="postId"><xsl:value-of select="id" /></div>
+                        </div>
+                        <div class="postContent">
+                            <xsl:apply-templates select="content" />
+                        </div>
+                        <div class="comments">
+                            <xsl:for-each select="/feed/entry[thr:in-reply-to/@ref=$postId]">
+                                <div class="comment">
+                                    <div class="commentTitle"><xsl:value-of select="title" /></div>
+                                    <div class="metadata">
+                                        <div class="commentDatePublished"><xsl:value-of select="published" /></div>
+                                        <div class="commentDateUpdated"><xsl:value-of select="updated" /></div>
+                                        <div class="commentId"><xsl:value-of select="id" /></div>
+                                    </div>
+                                    <div class="commentContent"><xsl:value-of select="content" /></div>
+                                </div>
+                            </xsl:for-each>
+                        </div>
                     </div>
                 </body>
             </html>
