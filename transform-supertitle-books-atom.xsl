@@ -76,6 +76,7 @@
 
     <xsl:template match="/feed" mode="index">
         <exsl:document href="./postIndex.html">
+            <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
             <html>
                 <head>
                     <link rel="stylesheet" href="../../../screen.css"></link>
@@ -139,6 +140,7 @@
             </xsl:choose>
         </xsl:variable>
         <exsl:document href="./{$postYear}/{$postMonth}/{$postFilename}.html">
+            <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
             <html>
                 <head>
                     <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
