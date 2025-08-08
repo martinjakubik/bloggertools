@@ -50,7 +50,7 @@
             </xsl:choose>
             </xsl:variable>
         <xsl:variable name="postVeryShortId" select="substring($postShortId, 1, 6)"></xsl:variable>
-        <xsl:variable name="postFilenameCandidate" select="concat(substring(translate(translate(title, ' ', '-'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;:?!,+#$', 'abcdefghijklmnopqrstuvwxyz-------'), 1, 16), '-', $postVeryShortId)"></xsl:variable>
+        <xsl:variable name="postFilenameCandidate" select="concat(substring(translate(translate(title, ' ', '-'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;:?!,+#$/', 'abcdefghijklmnopqrstuvwxyz--------'), 1, 16), '-', $postVeryShortId)"></xsl:variable>
         <xsl:variable name="postFilename">
             <xsl:choose>
                 <xsl:when test="string-length(title) > 0">
@@ -128,7 +128,7 @@
             </xsl:choose>
             </xsl:variable>
         <xsl:variable name="postVeryShortId" select="substring($postShortId, 1, 6)"></xsl:variable>
-        <xsl:variable name="postFilenameCandidate" select="concat(substring(translate(translate(title, ' ', '-'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;:?!,+#$', 'abcdefghijklmnopqrstuvwxyz-------'), 1, 16), '-', $postVeryShortId)"></xsl:variable>
+        <xsl:variable name="postFilenameCandidate" select="concat(substring(translate(translate(title, ' ', '-'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;:?!,+#$/', 'abcdefghijklmnopqrstuvwxyz--------'), 1, 16), '-', $postVeryShortId)"></xsl:variable>
         <xsl:variable name="postFilename">
             <xsl:choose>
                 <xsl:when test="string-length(title) > 0">
