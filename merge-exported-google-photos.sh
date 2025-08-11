@@ -50,10 +50,8 @@ for x in $basefilepath/Takeout* ; do
 done
 
 if [[ -e list_of_google_takeout_directories ]] ; then
-    file_array=()
     while IFS= read -r google_takeout_source_directory; do
         if [[ ! -z "${google_takeout_source_directory// }" ]] ; then
-            file_array+=($google_takeout_source_directory)
             google_takeout_directory_basename=$(basename "$google_takeout_source_directory")
             if [[ ! -d $destinationDir/"$google_takeout_directory_basename" ]] ; then
                 mkdir -p "$destinationDir/$google_takeout_directory_basename"
