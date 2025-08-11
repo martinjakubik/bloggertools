@@ -42,8 +42,7 @@ else
     basefilepath=$(dirname "$inputDir")/$(basename "$inputDir")
 fi
 
-for x in $basefilepath/Takeout* ; do
-    google_takeout_directory="$x"
+for google_takeout_directory in $basefilepath/Takeout* ; do
     if [[ -d "$google_takeout_directory" ]] ; then
         find "$google_takeout_directory" -type d -depth 2 >> list_of_google_takeout_directories
     fi
