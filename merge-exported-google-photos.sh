@@ -55,8 +55,8 @@ if [[ -e list_of_google_takeout_directories ]] ; then
             google_takeout_directory_basename=$(basename "$google_takeout_source_directory")
             if [[ ! -d $destinationDir/"$google_takeout_directory_basename" ]] ; then
                 mkdir -p "$destinationDir/$google_takeout_directory_basename"
-                cp "$google_takeout_source_directory"/* "$destinationDir"/"$google_takeout_directory_basename/"
             fi
+            cp "$google_takeout_source_directory"/* "$destinationDir"/"$google_takeout_directory_basename/"
         fi
     done < list_of_google_takeout_directories
 fi
