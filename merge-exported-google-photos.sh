@@ -4,8 +4,8 @@ USAGE="usage: $0 -i --inputDir inputDir -o --destinationDir destinationDir --lis
 
 # set up defaults
 DEBUG=0
-list_numbered_directories=1
-copy_files=1
+list_numbered_directories=0
+copy_files=0
 using_downloads_folder=1
 inputDir=~/inputDir
 destinationDir=~/destinationDir
@@ -46,24 +46,32 @@ else
     basefilepath=$(dirname "$inputDir")/$(basename "$inputDir")
 fi
 
-if [ "$listDirectories" = "no" ] ; then
+if [ "$listDirectories" = "yes" ] ; then
+    list_numbered_directories=1
+else
     list_numbered_directories=0
 fi
 
-if [ "$copyFiles" = "no" ] ; then
+if [ "$copyFiles" = "yes" ] ; then
+    copy_files=1
+else
     copy_files=0
 fi
 
 if [[ $list_numbered_directories -eq 1 ]] ; then
+    echo listing directories
     echo > list_of_numbered_directories
     for numbered_directory in $basefilepath/Takeout* ; do
         if [[ -d "$numbered_directory" ]] ; then
             find "$numbered_directory" -type d -depth 2 >> list_of_numbered_directories
         fi
     done
+else
+    echo not listing directories; to enable this, add --listDirectories yes
 fi
 
 if [[ $copy_files -eq 1 ]] ; then
+    echo copying files
     if [[ -e list_of_numbered_directories ]] ; then
         while IFS= read -r numbered_source_directory; do
             if [[ ! -z "${numbered_source_directory// }" ]] ; then
@@ -75,4 +83,6 @@ if [[ $copy_files -eq 1 ]] ; then
             fi
         done < list_of_numbered_directories
     fi
+else
+    echo not copying files; to enable this, add --copyFiles yes
 fi
