@@ -67,7 +67,7 @@ if [[ $list_numbered_directories -eq 1 ]] ; then
         fi
     done
 else
-    echo not listing directories; to enable this, add --listDirectories yes
+    echo "not listing directories; to enable this, add --listDirectories yes"
 fi
 
 if [[ $copy_files -eq 1 ]] ; then
@@ -77,12 +77,12 @@ if [[ $copy_files -eq 1 ]] ; then
             if [[ ! -z "${numbered_source_directory// }" ]] ; then
                 numbered_directory_basename=$(basename "$numbered_source_directory")
                 if [[ ! -d $destinationDir/"$numbered_directory_basename" ]] ; then
-                    echo mkdir -p "$destinationDir/$numbered_directory_basename"
+                    mkdir -p "$destinationDir/$numbered_directory_basename"
                 fi
-                echo cp "$numbered_source_directory"/* "$destinationDir"/"$numbered_directory_basename/"
+                cp "$numbered_source_directory"/* "$destinationDir"/"$numbered_directory_basename/"
             fi
         done < list_of_numbered_directories
     fi
 else
-    echo not copying files; to enable this, add --copyFiles yes
+    echo "not copying files; to enable this, add --copyFiles yes"
 fi
