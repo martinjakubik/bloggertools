@@ -70,11 +70,14 @@ else
     echo "not listing directories; to enable this, add --listDirectories yes"
 fi
 
+directory_count=0
 if [[ $copy_files -eq 1 ]] ; then
     echo copying files
     if [[ -e list_of_numbered_directories ]] ; then
         while IFS= read -r numbered_source_directory; do
             if [[ ! -z "${numbered_source_directory// }" ]] ; then
+                (( directory_count++ ))
+                echo directory count: $directory_count
                 numbered_directory_basename=$(basename "$numbered_source_directory")
                 if [[ ! -d $destinationDir/"$numbered_directory_basename" ]] ; then
                     mkdir -p "$destinationDir/$numbered_directory_basename"
