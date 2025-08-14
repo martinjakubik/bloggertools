@@ -18,6 +18,14 @@ destinationDir=~/destinationDir
 # /Volumes/DiskName/Photos/My Photos/Photos from 2015/IMG_8467.JPG
 # /Volumes/DiskName/Photos/My Photos/Photos from 2015/la fête chez mamie.MOV
 # /Volumes/DiskName/Photos/My Photos/Photos from 2017/Party at Earl _s.JPG
+#
+# In this example, if the destinationDir is '~/Downloads' it will move the first file from:
+#
+# /Volumes/DiskName/Photos/My Photos/Photos from 2017/IMG_2602.MOV
+#
+# to:
+#
+# ~/Downloads/Photos from 2017/IMG_2602.MOV
 
 
 # parses and reads command line arguments
