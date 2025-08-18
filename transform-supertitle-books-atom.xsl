@@ -1,6 +1,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exsl="http://exslt.org/common" xmlns:thr='http://purl.org/syndication/thread/1.0' xmlns:georss='http://www.georss.org/georss' xmlns:gd='http://schemas.google.com/g/2005' extension-element-prefixes="exsl" exclude-result-prefixes="thr georss gd" version="1.0">
 
-    <xsl:output method="html"/>
+    <xsl:output method="html" encoding="UTF-8" />
 
     <xsl:variable name="siteRootUrl">https://www.supertitle.org/content/books/app</xsl:variable>
 
