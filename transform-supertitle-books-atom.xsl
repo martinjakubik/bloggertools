@@ -82,6 +82,7 @@
             <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
             <html>
                 <head>
+                    <meta charset="utf8"/>
                     <link rel="stylesheet" href="../../../screen.css"></link>
                     <link rel="stylesheet" href="screen.css"></link>
                 </head>
@@ -148,6 +149,7 @@
             <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
             <html>
                 <head>
+                    <meta charset="utf8"/>
                     <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
                         <xsl:attribute name="href">
                             <xsl:text>../../../../../screen.css</xsl:text>
