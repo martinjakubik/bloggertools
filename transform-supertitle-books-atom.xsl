@@ -6,6 +6,7 @@
 
     <xsl:key name="postYearKey" match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']" use="substring(published, 1, 4)"></xsl:key>
 
+    <!-- counts the entries -->
     <xsl:template match="/">
         <xsl:apply-templates select="/feed/entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']" />
         <xsl:apply-templates select="/feed" mode="index" />
@@ -34,6 +35,7 @@
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#comment']">
     </xsl:template>
     
+    <!-- generates an html link to the current entry -->
     <xsl:template match="entry" mode="linkref">
         <xsl:param name="linkSource" select="post"></xsl:param>
         <xsl:variable name="postId" select="id"></xsl:variable>
@@ -74,6 +76,7 @@
         </xsl:choose>
     </xsl:template>
 
+    <!-- generates an index of all posts -->
     <xsl:template match="/feed" mode="index">
         <exsl:document href="./postIndex.html">
             <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
@@ -93,6 +96,7 @@
         </exsl:document>
     </xsl:template>
 
+    <!-- in the index, formats the posts for a single year -->
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']" mode="index">
         <h1 class="postYear"><xsl:value-of select="substring(published, 1, 4)"></xsl:value-of></h1>
         <ul>
@@ -113,6 +117,7 @@
         </ul>
     </xsl:template>
 
+    <!-- generates a single post -->
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']">
         <xsl:variable name="postId" select="id"></xsl:variable>
         <xsl:variable name="postYear" select="substring(published, 1, 4)"></xsl:variable>
@@ -225,6 +230,7 @@
         <blockquote><xsl:apply-templates></xsl:apply-templates></blockquote>
     </xsl:template>
     
+    <!-- formats a link as html -->
     <xsl:template match="p/link">
         <xsl:variable name="targetId" select="@targetId"></xsl:variable>
         <a>
