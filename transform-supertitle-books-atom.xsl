@@ -100,7 +100,7 @@
         </exsl:document>
     </xsl:template>
 
-    <!-- in the index, formats the posts for a single year -->
+    <!-- in the index, lists the posts for a single year -->
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid']" mode="index">
         <h1 class="postYear"><xsl:value-of select="substring(published, 1, 4)"></xsl:value-of></h1>
         <ul>
