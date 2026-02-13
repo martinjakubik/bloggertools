@@ -134,7 +134,7 @@
                     <xsl:value-of select="substring-before(id, '-')" />
                 </xsl:otherwise>
             </xsl:choose>
-            </xsl:variable>
+        </xsl:variable>
         <xsl:variable name="postVeryShortId" select="substring($postShortId, 1, 6)"></xsl:variable>
         <xsl:variable name="strToReplace">ABCDEFGHIJKLMNOPQRSTUVWXYZ;:?!,+#$/'"</xsl:variable>
         <xsl:variable name="strReplacer0">abcdefghijklmnopqrstuvwxyz-----------</xsl:variable>
