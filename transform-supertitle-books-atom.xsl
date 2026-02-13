@@ -26,6 +26,7 @@
         </exsl:document>
     </xsl:template>
 
+    <!-- skips unwanted content -->
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#template']">
     </xsl:template>
     
