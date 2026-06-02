@@ -36,6 +36,24 @@
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#comment']">
     </xsl:template>
     
+    <!-- generates a file name given a title-->
+    <xsl:template match="entry" mode="filename">
+        <xsl:param name="postShortId" select="prefix:id-0123457890-abcdef"></xsl:param>
+        <xsl:variable name="postVeryShortId" select="substring($postShortId, 1, 6)"></xsl:variable>
+        <xsl:variable name="title" select="id"></xsl:variable>
+        <xsl:variable name="strToReplace">ABCDEFGHIJKLMNOPQRSTUVWXYZ;:?!,+#$/'"</xsl:variable>
+        <xsl:variable name="strReplacer0">abcdefghijklmnopqrstuvwxyz-----------</xsl:variable>
+        <xsl:variable name="postFilenameCandidate" select="concat(substring(translate(translate(title, ' ', '-'), $strToReplace, $strReplacer0), 1, 16), '-', $postVeryShortId)"></xsl:variable>
+        <xsl:choose>
+            <xsl:when test="string-length(title) > 0">
+                <xsl:value-of select="$postFilenameCandidate" />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$postShortId" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     <!-- generates an html link to the current entry -->
     <xsl:template match="entry" mode="linkref">
         <xsl:param name="linkSource" select="post"></xsl:param>
@@ -51,20 +69,11 @@
                     <xsl:value-of select="substring-before(id, '-')" />
                 </xsl:otherwise>
             </xsl:choose>
-            </xsl:variable>
-        <xsl:variable name="postVeryShortId" select="substring($postShortId, 1, 6)"></xsl:variable>
-        <xsl:variable name="strToReplace">ABCDEFGHIJKLMNOPQRSTUVWXYZ;:?!,+#$/'"</xsl:variable>
-        <xsl:variable name="strReplacer0">abcdefghijklmnopqrstuvwxyz-----------</xsl:variable>
-        <xsl:variable name="postFilenameCandidate" select="concat(substring(translate(translate(title, ' ', '-'), $strToReplace, $strReplacer0), 1, 16), '-', $postVeryShortId)"></xsl:variable>
+        </xsl:variable>
         <xsl:variable name="postFilename">
-            <xsl:choose>
-                <xsl:when test="string-length(title) > 0">
-                    <xsl:value-of select="$postFilenameCandidate" />
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$postShortId" />
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:apply-templates select="." mode="filename">
+                <xsl:with-param name="postShortId"><xsl:value-of select="$postShortId" /></xsl:with-param>
+            </xsl:apply-templates>
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="$linkSource='index'">
@@ -136,19 +145,10 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="postVeryShortId" select="substring($postShortId, 1, 6)"></xsl:variable>
-        <xsl:variable name="strToReplace">ABCDEFGHIJKLMNOPQRSTUVWXYZ;:?!,+#$/'"</xsl:variable>
-        <xsl:variable name="strReplacer0">abcdefghijklmnopqrstuvwxyz-----------</xsl:variable>
-        <xsl:variable name="postFilenameCandidate" select="concat(substring(translate(translate(title, ' ', '-'), $strToReplace, $strReplacer0), 1, 16), '-', $postVeryShortId)"></xsl:variable>
         <xsl:variable name="postFilename">
-            <xsl:choose>
-                <xsl:when test="string-length(title) > 0">
-                    <xsl:value-of select="$postFilenameCandidate" />
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$postShortId" />
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:apply-templates select="." mode="filename">
+                <xsl:with-param name="postShortId"><xsl:value-of select="$postShortId" /></xsl:with-param>
+            </xsl:apply-templates>
         </xsl:variable>
         <exsl:document href="./{$postYear}/{$postMonth}/{$postFilename}.html">
             <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
