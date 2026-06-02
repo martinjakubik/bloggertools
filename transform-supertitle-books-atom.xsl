@@ -38,7 +38,16 @@
     
     <!-- generates a file name given a title-->
     <xsl:template match="entry" mode="filename">
-        <xsl:param name="postShortId" select="prefix:id-0123457890-abcdef"></xsl:param>
+        <xsl:variable name="postShortId">   
+            <xsl:choose>
+                <xsl:when test="starts-with(id, 'tag:blogger.com')">
+                    <xsl:value-of select="substring-after(substring-after(id, '-'), '-')" />
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="substring-before(id, '-')" />
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:variable name="postVeryShortId" select="substring($postShortId, 1, 6)"></xsl:variable>
         <xsl:variable name="title" select="id"></xsl:variable>
         <xsl:variable name="strToReplace">ABCDEFGHIJKLMNOPQRSTUVWXYZ;:?!,+#$/'"</xsl:variable>
@@ -60,20 +69,8 @@
         <xsl:variable name="postId" select="id"></xsl:variable>
         <xsl:variable name="postYear" select="substring(published, 1, 4)"></xsl:variable>
         <xsl:variable name="postMonth" select="substring(published, 6, 2)"></xsl:variable>
-        <xsl:variable name="postShortId">   
-            <xsl:choose>
-                <xsl:when test="starts-with(id, 'tag:blogger.com')">
-                    <xsl:value-of select="substring-after(substring-after(id, '-'), '-')" />
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="substring-before(id, '-')" />
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
         <xsl:variable name="postFilename">
-            <xsl:apply-templates select="." mode="filename">
-                <xsl:with-param name="postShortId"><xsl:value-of select="$postShortId" /></xsl:with-param>
-            </xsl:apply-templates>
+            <xsl:apply-templates select="." mode="filename" />
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="$linkSource='index'">
@@ -135,20 +132,8 @@
         <xsl:variable name="postId" select="id"></xsl:variable>
         <xsl:variable name="postYear" select="substring(published, 1, 4)"></xsl:variable>
         <xsl:variable name="postMonth" select="substring(published, 6, 2)"></xsl:variable>
-        <xsl:variable name="postShortId">   
-            <xsl:choose>
-                <xsl:when test="starts-with(id, 'tag:blogger.com')">
-                    <xsl:value-of select="substring-after(substring-after(id, '-'), '-')" />
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="substring-before(id, '-')" />
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
         <xsl:variable name="postFilename">
-            <xsl:apply-templates select="." mode="filename">
-                <xsl:with-param name="postShortId"><xsl:value-of select="$postShortId" /></xsl:with-param>
-            </xsl:apply-templates>
+            <xsl:apply-templates select="." mode="filename" />
         </xsl:variable>
         <exsl:document href="./{$postYear}/{$postMonth}/{$postFilename}.html">
             <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
