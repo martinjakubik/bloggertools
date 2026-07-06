@@ -29,16 +29,16 @@
     <!-- skips unwanted content -->
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#template']">
     </xsl:template>
-    
+
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#settings']">
     </xsl:template>
-    
+
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#comment']">
     </xsl:template>
-    
+
     <!-- generates a file name given a title-->
     <xsl:template match="entry" mode="filename">
-        <xsl:variable name="postShortId">   
+        <xsl:variable name="postShortId">
             <xsl:choose>
                 <xsl:when test="starts-with(id, 'tag:blogger.com')">
                     <xsl:value-of select="substring-after(substring-after(id, '-'), '-')" />
@@ -62,7 +62,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <!-- generates an html link to the current entry -->
     <xsl:template match="entry" mode="linkref">
         <xsl:param name="linkSource" select="post"></xsl:param>
@@ -91,7 +91,7 @@
             <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
             <html>
                 <head>
-                    <meta charset="utf8"/>
+                    <meta charset="utf-8" />
                     <link rel="stylesheet" href="../../../screen.css"></link>
                     <link rel="stylesheet" href="screen.css"></link>
                 </head>
@@ -139,7 +139,7 @@
             <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
             <html>
                 <head>
-                    <meta charset="utf8"/>
+                    <meta charset="utf-8" />
                     <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
                         <xsl:attribute name="href">
                             <xsl:text>../../../../../screen.css</xsl:text>
@@ -209,19 +209,19 @@
     <xsl:template match="p">
         <p><xsl:apply-templates></xsl:apply-templates></p>
     </xsl:template>
-    
+
     <xsl:template match="i">
         <i><xsl:apply-templates></xsl:apply-templates></i>
     </xsl:template>
-    
+
     <xsl:template match="b">
         <b><xsl:apply-templates></xsl:apply-templates></b>
     </xsl:template>
-    
+
     <xsl:template match="blockquote">
         <blockquote><xsl:apply-templates></xsl:apply-templates></blockquote>
     </xsl:template>
-    
+
     <!-- formats a link as html -->
     <xsl:template match="p/link">
         <xsl:variable name="targetId" select="@targetId"></xsl:variable>
@@ -234,7 +234,7 @@
             <xsl:apply-templates></xsl:apply-templates>
         </a>
     </xsl:template>
-    
+
     <xsl:template match="img">
         <img>
             <xsl:attribute name="class">
@@ -245,5 +245,5 @@
             </xsl:attribute>
             <xsl:apply-templates></xsl:apply-templates></img>
     </xsl:template>
-    
+
   </xsl:stylesheet>
