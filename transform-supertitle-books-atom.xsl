@@ -139,7 +139,7 @@
                                     <xsl:with-param name="linkSource">index</xsl:with-param>
                                 </xsl:apply-templates>
                             </xsl:attribute>
-                            <xsl:value-of select="title"></xsl:value-of>
+                            <xsl:apply-templates select="." mode="title" />
                         </a>
                     </p>
                 </li>
