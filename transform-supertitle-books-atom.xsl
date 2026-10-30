@@ -50,9 +50,9 @@
         </xsl:variable>
         <xsl:variable name="postFairlyShortId" select="substring($postShortId, 1, 18)"></xsl:variable>
         <xsl:variable name="title" select="id"></xsl:variable>
-        <xsl:variable name="strToReplace">ABCDEFGHIJKLMNOPQRSTUVWXYZ;:?!,+#$/'"</xsl:variable>
-        <xsl:variable name="strReplacer0">abcdefghijklmnopqrstuvwxyz-----------</xsl:variable>
-        <xsl:variable name="postFilenameCandidate" select="concat(substring(translate(translate(title, ' ', '-'), $strToReplace, $strReplacer0), 1, 16), '-', $postFairlyShortId)"></xsl:variable>
+        <xsl:variable name="strAllowedCharacters">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyxz0123456789</xsl:variable>
+        <xsl:variable name="titleCandidate" select="translate(title, translate(title, $strAllowedCharacters, ''), '')"></xsl:variable>
+        <xsl:variable name="postFilenameCandidate" select="concat(substring($titleCandidate, 1, 16), '-', $postFairlyShortId)"></xsl:variable>
         <xsl:choose>
             <xsl:when test="string-length(title) > 0">
                 <xsl:value-of select="$postFilenameCandidate" />
