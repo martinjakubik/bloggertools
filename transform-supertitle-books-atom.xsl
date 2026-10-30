@@ -36,6 +36,26 @@
     <xsl:template match="entry[category/@term='http://schemas.google.com/blogger/2008/kind#comment']">
     </xsl:template>
 
+    <!-- generates a title given an entry -->
+    <xsl:template match="entry" mode="title">
+        <xsl:variable name="title" select="id"></xsl:variable>
+        <xsl:variable name="strAllowedCharacters">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyxz0123456789 </xsl:variable>
+        <xsl:variable name="titleCandidate" select="translate(title, translate(title, $strAllowedCharacters, ''), '')"></xsl:variable>
+        <xsl:variable name="strDateAsTitle">
+            <xsl:call-template name="short-date">
+                <xsl:with-param name="strIsoDate" select="./published" />
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="string-length($titleCandidate) > 0">
+                <xsl:value-of select="$titleCandidate" />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$strDateAsTitle" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <!-- generates a file name given a title-->
     <xsl:template match="entry" mode="filename">
         <xsl:variable name="postShortId">
@@ -178,7 +198,9 @@
                         </xsl:if>
                     </div>
                     <div class="post">
-                        <div class="postTitle"><xsl:value-of select="title" /></div>
+                        <div class="postTitle">
+                            <xsl:apply-templates select="." mode="title" />
+                        </div>
                         <div class="metadata">
                             <div class="postDatePublished"><xsl:value-of select="published" /></div>
                             <div class="postDateUpdated"><xsl:value-of select="updated" /></div>
@@ -246,4 +268,29 @@
             <xsl:apply-templates></xsl:apply-templates></img>
     </xsl:template>
 
+    <!-- formats an ISO date string as a short date like Apr 21st, 2007 -->
+    <xsl:template name="short-date">
+      <xsl:param name="strIsoDate"/>
+
+      <xsl:variable name="strYear"  select="substring($strIsoDate, 1, 4)"/>
+      <xsl:variable name="strMonth" select="number(substring($strIsoDate, 6, 2))"/>
+      <xsl:variable name="strDay"   select="number(substring($strIsoDate, 9, 2))"/>
+
+      <xsl:variable name="strShortMonths"
+        select="'Jan. Feb. Mar. Apr. May  Jun. Jul. Aug. Sep. Oct. Nov. Dec. '"/>
+      <xsl:variable name="strShortMonth"
+        select="normalize-space(substring($strShortMonths, ($strMonth - 1) * 5 + 1, 5))"/>
+
+      <xsl:variable name="strSuffix">
+        <xsl:choose>
+          <xsl:when test="$strDay &gt;= 11 and $strDay &lt;= 13">th</xsl:when>
+          <xsl:when test="$strDay mod 10 = 1">st</xsl:when>
+          <xsl:when test="$strDay mod 10 = 2">nd</xsl:when>
+          <xsl:when test="$strDay mod 10 = 3">rd</xsl:when>
+          <xsl:otherwise>th</xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+
+      <xsl:value-of select="concat($strShortMonth, ' ', $strDay, $strSuffix, ', ', $strYear)"/>
+    </xsl:template>
   </xsl:stylesheet>
