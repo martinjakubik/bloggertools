@@ -112,6 +112,7 @@
             <html>
                 <head>
                     <meta charset="utf-8" />
+                    <link rel="stylesheet" href="../../../palette.css"></link>
                     <link rel="stylesheet" href="../../../screen.css"></link>
                     <link rel="stylesheet" href="screen.css"></link>
                 </head>
@@ -162,6 +163,7 @@
                     <meta charset="utf-8" />
                     <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
                         <xsl:attribute name="href">
+                            <xsl:text>../../../../../palette.css</xsl:text>
                             <xsl:text>../../../../../screen.css</xsl:text>
                         </xsl:attribute>
                     </link>
