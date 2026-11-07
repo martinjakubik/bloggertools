@@ -164,6 +164,10 @@
                     <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
                         <xsl:attribute name="href">
                             <xsl:text>../../../../../palette.css</xsl:text>
+                        </xsl:attribute>
+                    </link>
+                    <link rel="stylesheet" title="supertitle:books" type="text/css" media="screen">
+                        <xsl:attribute name="href">
                             <xsl:text>../../../../../screen.css</xsl:text>
                         </xsl:attribute>
                     </link>
