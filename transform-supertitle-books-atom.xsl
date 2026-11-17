@@ -265,9 +265,13 @@
 
     <xsl:template match="img">
         <img>
-            <xsl:attribute name="class">
-                <xsl:value-of select="@class"></xsl:value-of>
-            </xsl:attribute>
+            <xsl:choose>
+                <xsl:when test="string-length(@class) > 0">
+                    <xsl:attribute name="class">
+                        <xsl:value-of select="@class"></xsl:value-of>
+                    </xsl:attribute>
+                </xsl:when>
+            </xsl:choose>
             <xsl:attribute name="src">
                 <xsl:value-of select="@src"></xsl:value-of>
             </xsl:attribute>
