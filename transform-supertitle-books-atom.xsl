@@ -39,8 +39,7 @@
     <!-- generates a title given an entry -->
     <xsl:template match="entry" mode="title">
         <xsl:variable name="title" select="id"></xsl:variable>
-        <xsl:variable name="strAllowedCharacters">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyxz0123456789 </xsl:variable>
-        <xsl:variable name="titleCandidate" select="translate(title, translate(title, $strAllowedCharacters, ''), '')"></xsl:variable>
+        <xsl:variable name="titleCandidate" select="./title"></xsl:variable>
         <xsl:variable name="strDateAsTitle">
             <xsl:call-template name="short-date">
                 <xsl:with-param name="strIsoDate" select="./published" />
