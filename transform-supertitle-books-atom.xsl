@@ -21,6 +21,7 @@
                             <p>entries: <xsl:value-of select="count(/feed/entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid'])"></xsl:value-of></p>
                         </li>
                     </ul>
+                    <p>This page uses fonts from <a href="https://github.com/theleagueof/fanwood">The League of Movable Type</a>.</p>
                 </body>
             </html>
         </exsl:document>
@@ -122,6 +123,7 @@
                     <xsl:apply-templates select="entry[category/@term='http://schemas.google.com/blogger/2008/kind#post'][id!='uuid'][generate-id(.)=generate-id(key('postYearKey', substring(published, 1, 4))[1])]" mode="index"></xsl:apply-templates>
                     <script src="../../../app.js" type="module"></script>
                 </body>
+                <p>This page uses fonts from <a href="https://github.com/theleagueof/fanwood">The League of Movable Type</a>.</p>
             </html>
         </exsl:document>
     </xsl:template>
@@ -228,6 +230,7 @@
                             </xsl:for-each>
                         </div>
                     </div>
+                    <p>This page uses fonts from <a href="https://github.com/theleagueof/fanwood">The League of Movable Type</a>.</p>
                 </body>
             </html>
         </exsl:document>
