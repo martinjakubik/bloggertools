@@ -210,11 +210,7 @@
                     </div>
                     <div class="post">
                         <div class="postTitle">
-                            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMin slice" role="heading">
-                                <text class="postHeadingText" y="10" x="1">
-                                    <xsl:apply-templates select="." mode="title" />
-                                </text>
-                            </svg>
+                            <xsl:apply-templates select="." mode="title" />
                         </div>
                         <div class="metadata">
                             <div class="postDatePublished"><xsl:value-of select="published" /></div>
