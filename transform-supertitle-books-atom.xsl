@@ -235,7 +235,7 @@
                         </div>
                     </div>
                     <div id="footer">
-                        <p>This page uses fonts from <a href="https://github.com/theleagueof/fanwood">The League of Movable Type</a>.</p>
+                        <p>This page uses <a href="https://github.com/theleagueof/raleway">fonts</a> <a href="https://github.com/theleagueof/fanwood">from</a> <a href="https://www.theleagueofmoveabletype.com">The League of Movable Type</a>.</p>
                     </div>
                 </body>
             </html>
